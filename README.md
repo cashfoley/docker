@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/dinudumitrascu/iamddunumb/_apis/build/status/enddumitrascu.docker?branchName=master)](https://dev.azure.com/dinudumitrascu/iamddunumb/_build/latest?definitionId=1&branchName=master)
+
 
 # Contributing
 
