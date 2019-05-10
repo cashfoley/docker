@@ -15,7 +15,7 @@ stages:
         displayName: Container
         
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: $(vmImageName)
 
         steps:
         - script: echo Hello, world!
