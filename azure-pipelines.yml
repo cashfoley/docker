@@ -22,5 +22,5 @@ steps:
   displayName: Login to ACR
   inputs:
     command: login
-    containerRegistry: 'RDO Dev-Test - jenkinsK8sRegistry'
+    containerRegistry: 'jenkinsK8sRegistry'
 
