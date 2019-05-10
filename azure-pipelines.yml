@@ -12,7 +12,8 @@ stages:
   - stage: build
     jobs:
       - job: build
-        displayName: Build Container
+        displayName: Container
+        
         pool:
           vmImage: 'ubuntu-latest'
 
@@ -37,4 +38,22 @@ stages:
         #    repository: 'sample'
         #    command: 'buildAndPush'
         #    Dockerfile: '**/Dockerfile'
+
+  - stage: deploy
+    jobs:
+      - job: deploy
+        displayName: K8s
+
+        pool:
+          vmImage: 'ubuntu-latest'
+
+        steps:
+        - task: Kubernetes@1
+          inputs:
+            connectionType: 'Kubernetes Service Connection'
+            kubernetesServiceEndpoint: 'RDO - DevTest - devops-jenkins'
+            namespace: 'default'
+            command: 'login'
+            secretType: 'dockerRegistry'
+            containerRegistryType: 'Azure Container Registry'
 
