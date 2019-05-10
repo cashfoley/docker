@@ -8,6 +8,9 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 trigger:
 - master
 
+variables:
+  skipDockerBuild: true
+
 stages:
   - stage: build
     jobs:
