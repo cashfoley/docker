@@ -38,7 +38,7 @@ stages:
             repository: 'sample'
             command: 'buildAndPush'
             Dockerfile: '**/Dockerfile'
-          condition: ne(variables['skipDockerBuild'], 'true'))
+          condition: ne(variables['skipDockerBuild'], 'true')
 
   - stage: deploy
     jobs:
