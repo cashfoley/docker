@@ -32,12 +32,13 @@ stages:
             command: login
             containerRegistry: 'jenkinsK8sRegistry'
 
-        #- task: Docker@2
-        #  inputs:
-        #    containerRegistry: 'jenkinsK8sRegistry'
-        #    repository: 'sample'
-        #    command: 'buildAndPush'
-        #    Dockerfile: '**/Dockerfile'
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'jenkinsK8sRegistry'
+            repository: 'sample'
+            command: 'buildAndPush'
+            Dockerfile: '**/Dockerfile'
+          condition: ne(variables['skipDockerBuild'], 'true'))
 
   - stage: deploy
     jobs:
@@ -45,7 +46,7 @@ stages:
         displayName: K8s
 
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: $(vmImageName)
 
         steps:
         - task: Kubernetes@1
