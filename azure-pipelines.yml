@@ -3,30 +3,38 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+name: $(Date:yyyyMMdd)$(Rev:.r)
+
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+stages:
+  - stage: build
+    jobs:
+      - job: build
+        displayName: Build Container
+        pool:
+          vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-  
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+        steps:
+        - script: echo Hello, world!
+          displayName: 'Run a one-line script'
+          
+        - script: |
+            echo Add other tasks to build, test, and deploy your project.
+            echo See https://aka.ms/yaml
+          displayName: 'Run a multi-line script'
 
-- task: Docker@2
-  displayName: Login to ACR
-  inputs:
-    command: login
-    containerRegistry: 'jenkinsK8sRegistry'
+        - task: Docker@2
+          displayName: Login to ACR
+          inputs:
+            command: login
+            containerRegistry: 'jenkinsK8sRegistry'
 
-- task: Docker@2
-  inputs:
-    containerRegistry: 'jenkinsK8sRegistry'
-    repository: 'sample'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+        #- task: Docker@2
+        #  inputs:
+        #    containerRegistry: 'jenkinsK8sRegistry'
+        #    repository: 'sample'
+        #    command: 'buildAndPush'
+        #    Dockerfile: '**/Dockerfile'
+
